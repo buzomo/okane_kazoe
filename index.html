@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おかねかぞえ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .total-amount {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            color: #2c3e50;
+        }
+        .zone {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .zone-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .item-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+            margin-right: 15px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .bill-icon {
+            border-radius: 4px;
+        }
+        .coin-icon {
+            border-radius: 50%;
+        }
+        .bill-10000 {
+            background-color: #ffd1dc; /* 薄ピンク */
+        }
+        .bill-5000 {
+            background-color: #e6e6fa; /* 薄紫 */
+        }
+        .bill-1000 {
+            background-color: #98fb98; /* 薄緑 */
+        }
+        .coin-500 {
+            background-color: gold; /* ゴールド */
+            color: #333;
+        }
+        .coin-100, .coin-50, .coin-1 {
+            background-color: #a0a0a0; /* グレー */
+        }
+        .coin-10 {
+            background-color: #8b4513; /* 茶色 */
+        }
+        .coin-5 {
+            background-color: #cd853f; /* 明るい茶色 */
+        }
+        .item-value {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 40px;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            gap: 8px;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            min-width: 40px;
+        }
+        button:active {
+            background-color: #2980b9;
+        }
+        .button-minus {
+            background-color: #e74c3c;
+        }
+        .button-minus:active {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>おかねかぞえ</h1>
+    <div class="total-amount" id="totalAmount">0円</div>
+
+    <div class="zone">
+        <div class="zone-title">紙幣</div>
+        <div class="item">
+            <div class="item-icon bill-icon bill-10000">10000</div>
+            <span class="item-value" id="bill10000Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('bill10000', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('bill10000', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('bill10000', -1)">-1</button>
+                <button onclick="changeValue('bill10000', 1)">+1</button>
+                <button onclick="changeValue('bill10000', 5)">+5</button>
+                <button onclick="changeValue('bill10000', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon bill-icon bill-5000">5000</div>
+            <span class="item-value" id="bill5000Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('bill5000', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('bill5000', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('bill5000', -1)">-1</button>
+                <button onclick="changeValue('bill5000', 1)">+1</button>
+                <button onclick="changeValue('bill5000', 5)">+5</button>
+                <button onclick="changeValue('bill5000', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon bill-icon bill-1000">1000</div>
+            <span class="item-value" id="bill1000Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('bill1000', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('bill1000', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('bill1000', -1)">-1</button>
+                <button onclick="changeValue('bill1000', 1)">+1</button>
+                <button onclick="changeValue('bill1000', 5)">+5</button>
+                <button onclick="changeValue('bill1000', 10)">+10</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="zone">
+        <div class="zone-title">硬貨</div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-500">500</div>
+            <span class="item-value" id="coin500Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin500', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin500', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin500', -1)">-1</button>
+                <button onclick="changeValue('coin500', 1)">+1</button>
+                <button onclick="changeValue('coin500', 5)">+5</button>
+                <button onclick="changeValue('coin500', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-100">100</div>
+            <span class="item-value" id="coin100Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin100', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin100', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin100', -1)">-1</button>
+                <button onclick="changeValue('coin100', 1)">+1</button>
+                <button onclick="changeValue('coin100', 5)">+5</button>
+                <button onclick="changeValue('coin100', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-50">50</div>
+            <span class="item-value" id="coin50Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin50', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin50', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin50', -1)">-1</button>
+                <button onclick="changeValue('coin50', 1)">+1</button>
+                <button onclick="changeValue('coin50', 5)">+5</button>
+                <button onclick="changeValue('coin50', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-10">10</div>
+            <span class="item-value" id="coin10Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin10', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin10', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin10', -1)">-1</button>
+                <button onclick="changeValue('coin10', 1)">+1</button>
+                <button onclick="changeValue('coin10', 5)">+5</button>
+                <button onclick="changeValue('coin10', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-5">5</div>
+            <span class="item-value" id="coin5Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin5', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin5', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin5', -1)">-1</button>
+                <button onclick="changeValue('coin5', 1)">+1</button>
+                <button onclick="changeValue('coin5', 5)">+5</button>
+                <button onclick="changeValue('coin5', 10)">+10</button>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-icon coin-icon coin-1">1</div>
+            <span class="item-value" id="coin1Value">0</span>
+            <div class="buttons">
+                <button class="button-minus" onclick="changeValue('coin1', -10)">-10</button>
+                <button class="button-minus" onclick="changeValue('coin1', -5)">-5</button>
+                <button class="button-minus" onclick="changeValue('coin1', -1)">-1</button>
+                <button onclick="changeValue('coin1', 1)">+1</button>
+                <button onclick="changeValue('coin1', 5)">+5</button>
+                <button onclick="changeValue('coin1', 10)">+10</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // LocalStorageからデータを読み込む関数
+        function loadData() {
+            const keys = ['bill10000', 'bill5000', 'bill1000', 'coin500', 'coin100', 'coin50', 'coin10', 'coin1'];
+            keys.forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value !== null) {
+                    document.getElementById(key + 'Value').textContent = value;
+                }
+            });
+            updateTotal();
+        }
+
+        // LocalStorageにデータを保存する関数
+        function saveData() {
+            const keys = ['bill10000', 'bill5000', 'bill1000', 'coin500', 'coin100', 'coin50', 'coin10', 'coin1'];
+            keys.forEach(key => {
+                localStorage.setItem(key, document.getElementById(key + 'Value').textContent);
+            });
+        }
+
+        // 値を変更する関数
+        function changeValue(id, delta) {
+            const valueElement = document.getElementById(id + 'Value');
+            let value = parseInt(valueElement.textContent) + delta;
+            if (value < 0) value = 0;
+            valueElement.textContent = value;
+            saveData();
+            updateTotal();
+        }
+
+        // 合計額を更新する関数
+        function updateTotal() {
+            const bill10000 = parseInt(document.getElementById('bill10000Value').textContent) || 0;
+            const bill5000 = parseInt(document.getElementById('bill5000Value').textContent) || 0;
+            const bill1000 = parseInt(document.getElementById('bill1000Value').textContent) || 0;
+            const coin500 = parseInt(document.getElementById('coin500Value').textContent) || 0;
+            const coin100 = parseInt(document.getElementById('coin100Value').textContent) || 0;
+            const coin50 = parseInt(document.getElementById('coin50Value').textContent) || 0;
+            const coin10 = parseInt(document.getElementById('coin10Value').textContent) || 0;
+            const coin1 = parseInt(document.getElementById('coin1Value').textContent) || 0;
+
+            const total = (bill10000 * 10000) + (bill5000 * 5000) + (bill1000 * 1000) +
+                          (coin500 * 500) + (coin100 * 100) + (coin50 * 50) +
+                          (coin10 * 10) + (coin1 * 1);
+
+            document.getElementById('totalAmount').textContent = `${total.toLocaleString()}円`;
+        }
+
+        // ページ読み込み時にデータを読み込む
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>
