@@ -78,14 +78,14 @@
         }
 
         .item-icon {
-            width: 35px; /* サイズをさらに微調整 */
-            height: 35px;
+            width: 50px; /* サイズをさらに微調整 */
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: #333;
-            font-size: 11px;
+            font-size: 16px;
             position: relative;
             margin-right: 5px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -103,10 +103,12 @@
         .coin-5 { background-color: #cd853f; color: white; }
 
         .item-count {
-            font-size: 13px;
+            font-size: 18px;
             font-weight: bold;
             color: #2c3e50;
-            white-space: nowrap; /* 折り返しを防ぐ */
+            white-space: nowrap;
+            margin-left: 5px;
+            margin-bottom: 3px;
         }
         .item-count span {
             font-size: 15px;
@@ -131,17 +133,18 @@
             background-color: #3498db;
             color: white;
             cursor: pointer;
-            font-size: 11px; /* フォントサイズを小さく */
+            font-size: 16px;
             font-weight: bold;
             flex: 1 1 12%; /* 7つのボタンが均等幅になるように調整 (100% / 7 = 14.2%) */
             min-width: 0; /* 最小幅を解除し、フレックスで制御 */
+            height:38px;
         }
-        button:active { background-color: #2980b9; }
-        .button-minus { background-color: #e74c3c; }
+        button:active { background-color: #3498dbbd; }
+        .button-minus { background-color: #e74c3c6b; }
         .button-minus:active { background-color: #c0392b; }
         .button-reset { 
-            background-color: #f39c12; /* リセットボタンの色 */
-            font-size: 10px; /* サイズを小さく */
+            background-color: #f39c1296; /* リセットボタンの色 */
+            font-size: 19px;
         }
         .button-reset:active { background-color: #e67e22; }
     </style>
